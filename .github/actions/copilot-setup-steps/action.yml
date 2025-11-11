@@ -29,27 +29,19 @@ runs:
         curl https://mise.run | sh
         echo "$HOME/.local/bin" >> $GITHUB_PATH
     
-    - name: Setup Node.js with mise
-      if: inputs.setup-nodejs == 'true'
+    - name: Setup languages with mise
+      if: inputs.setup-nodejs == 'true' || inputs.setup-ruby == 'true' || inputs.setup-python == 'true'
       shell: bash
       run: |
-        ~/.local/bin/mise install nodejs
-        ~/.local/bin/mise reshim
-        echo "$HOME/.local/share/mise/shims" >> $GITHUB_PATH
-    
-    - name: Setup Ruby with mise
-      if: inputs.setup-ruby == 'true'
-      shell: bash
-      run: |
-        ~/.local/bin/mise install ruby
-        ~/.local/bin/mise reshim
-        echo "$HOME/.local/share/mise/shims" >> $GITHUB_PATH
-    
-    - name: Setup Python with mise
-      if: inputs.setup-python == 'true'
-      shell: bash
-      run: |
-        ~/.local/bin/mise install python
+        if [ "${{ inputs.setup-nodejs }}" = "true" ]; then
+          ~/.local/bin/mise install nodejs
+        fi
+        if [ "${{ inputs.setup-ruby }}" = "true" ]; then
+          ~/.local/bin/mise install ruby
+        fi
+        if [ "${{ inputs.setup-python }}" = "true" ]; then
+          ~/.local/bin/mise install python
+        fi
         ~/.local/bin/mise reshim
         echo "$HOME/.local/share/mise/shims" >> $GITHUB_PATH
     
