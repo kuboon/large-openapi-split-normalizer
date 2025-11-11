@@ -1,0 +1,26 @@
+get:
+  summary: Get a user by ID
+  description: Retrieve detailed information about a specific user
+  operationId: getUser
+  tags:
+    - users
+  parameters:
+    - name: userId
+      in: path
+      description: User ID
+      required: true
+      schema:
+        type: string
+  responses:
+    '200':
+      description: Successful response
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/User.yaml'
+    '404':
+      description: User not found
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/Error.yaml'

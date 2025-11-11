@@ -1,0 +1,48 @@
+type: object
+description: Organization entity with circular reference to User
+required:
+  - id
+  - name
+properties:
+  id:
+    type: string
+    format: uuid
+    description: Unique identifier for the organization
+    example: "987e6543-e21b-45d3-a123-426614174999"
+  name:
+    type: string
+    minLength: 1
+    maxLength: 100
+    description: Organization name
+    example: "Acme Corporation"
+  description:
+    type: string
+    description: Organization description
+    example: "A leading technology company"
+  owner:
+    $ref: './User.yaml'
+    description: Owner of the organization (creates circular reference)
+  members:
+    type: array
+    description: List of members in the organization
+    items:
+      $ref: './User.yaml'
+  industry:
+    type: string
+    description: Industry sector
+    example: "Technology"
+  website:
+    type: string
+    format: uri
+    description: Organization website
+    example: "https://www.acme.com"
+  createdAt:
+    type: string
+    format: date-time
+    description: Timestamp when the organization was created
+    example: "2024-01-01T00:00:00Z"
+  updatedAt:
+    type: string
+    format: date-time
+    description: Timestamp when the organization was last updated
+    example: "2024-01-15T12:00:00Z"

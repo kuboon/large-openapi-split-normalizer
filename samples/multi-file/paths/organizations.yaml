@@ -1,0 +1,46 @@
+get:
+  summary: List all organizations
+  description: Retrieve a list of all organizations
+  operationId: listOrganizations
+  tags:
+    - organizations
+  responses:
+    '200':
+      description: Successful response
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '../components/schemas/Organization.yaml'
+    '400':
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/Error.yaml'
+post:
+  summary: Create a new organization
+  description: Create a new organization in the system
+  operationId: createOrganization
+  tags:
+    - organizations
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../components/schemas/OrganizationInput.yaml'
+  responses:
+    '201':
+      description: Organization created successfully
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/Organization.yaml'
+    '400':
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '../components/schemas/Error.yaml'

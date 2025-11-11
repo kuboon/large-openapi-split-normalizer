@@ -1,0 +1,35 @@
+type: object
+description: Input schema for creating a new user
+required:
+  - username
+  - email
+  - organizationId
+properties:
+  username:
+    type: string
+    minLength: 3
+    maxLength: 50
+    description: Username for login
+    example: "johndoe"
+  email:
+    type: string
+    format: email
+    description: User's email address
+    example: "john.doe@example.com"
+  fullName:
+    type: string
+    description: User's full name
+    example: "John Doe"
+  organizationId:
+    type: string
+    format: uuid
+    description: ID of the organization the user belongs to
+    example: "987e6543-e21b-45d3-a123-426614174999"
+  role:
+    type: string
+    enum:
+      - admin
+      - member
+      - viewer
+    default: "member"
+    description: User's role in the organization
