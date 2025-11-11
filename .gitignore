@@ -1,5 +1,6 @@
 # MoonBit build artifacts
-core/target/
+# Uncomment the line below to exclude WASM from git
+# core/target/
 
 # Ruby
 ruby/vendor/
