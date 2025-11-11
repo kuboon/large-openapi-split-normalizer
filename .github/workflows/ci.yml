@@ -1,0 +1,102 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-wasm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup MoonBit
+        run: |
+          curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash
+          echo "$HOME/.moon/bin" >> $GITHUB_PATH
+      
+      - name: Build WASM
+        run: |
+          cd core
+          moon build --target wasm
+      
+      - name: Upload WASM artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: hello-wasm
+          path: core/target/wasm/release/hello.wasm
+  
+  test-js:
+    needs: build-wasm
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Download WASM artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: hello-wasm
+          path: core/target/wasm/release/
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Run JS tests
+        run: |
+          cd js
+          npm test
+  
+  test-ruby:
+    needs: build-wasm
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Download WASM artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: hello-wasm
+          path: core/target/wasm/release/
+      
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+          bundler-cache: true
+          working-directory: ruby
+      
+      - name: Run Ruby tests
+        run: |
+          cd ruby
+          bundle exec ruby test/test_hello.rb
+  
+  test-python:
+    needs: build-wasm
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Download WASM artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: hello-wasm
+          path: core/target/wasm/release/
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      
+      - name: Install dependencies
+        run: |
+          cd python
+          pip install -r requirements.txt
+      
+      - name: Run Python tests
+        run: |
+          cd python
+          pytest
