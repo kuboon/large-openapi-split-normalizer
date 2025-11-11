@@ -67,7 +67,11 @@ System Python (3.9+) or via pyenv
 
 ## Quick Start
 
-### 1. Build the WASM Module
+**Note:** This repository includes a pre-built WASM module (`core/target/wasm/release/hello.wasm`) for immediate testing. You can skip step 1 if you just want to test the bindings.
+
+### 1. Build the WASM Module (Optional)
+
+If you have MoonBit installed:
 
 ```bash
 cd core
