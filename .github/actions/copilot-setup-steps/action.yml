@@ -1,0 +1,61 @@
+name: 'Copilot Setup Steps'
+description: 'Setup development environment using mise for Node.js, Ruby, Python and MoonBit toolchain'
+
+inputs:
+  setup-moonbit:
+    description: 'Whether to setup MoonBit toolchain'
+    required: false
+    default: 'false'
+  setup-nodejs:
+    description: 'Whether to setup Node.js'
+    required: false
+    default: 'false'
+  setup-ruby:
+    description: 'Whether to setup Ruby'
+    required: false
+    default: 'false'
+  setup-python:
+    description: 'Whether to setup Python'
+    required: false
+    default: 'false'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Install mise
+      if: inputs.setup-nodejs == 'true' || inputs.setup-ruby == 'true' || inputs.setup-python == 'true'
+      shell: bash
+      run: |
+        curl https://mise.run | sh
+        echo "$HOME/.local/bin" >> $GITHUB_PATH
+    
+    - name: Setup Node.js with mise
+      if: inputs.setup-nodejs == 'true'
+      shell: bash
+      run: |
+        ~/.local/bin/mise install nodejs
+        ~/.local/bin/mise reshim
+        echo "$HOME/.local/share/mise/shims" >> $GITHUB_PATH
+    
+    - name: Setup Ruby with mise
+      if: inputs.setup-ruby == 'true'
+      shell: bash
+      run: |
+        ~/.local/bin/mise install ruby
+        ~/.local/bin/mise reshim
+        echo "$HOME/.local/share/mise/shims" >> $GITHUB_PATH
+    
+    - name: Setup Python with mise
+      if: inputs.setup-python == 'true'
+      shell: bash
+      run: |
+        ~/.local/bin/mise install python
+        ~/.local/bin/mise reshim
+        echo "$HOME/.local/share/mise/shims" >> $GITHUB_PATH
+    
+    - name: Setup MoonBit
+      if: inputs.setup-moonbit == 'true'
+      shell: bash
+      run: |
+        curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash
+        echo "$HOME/.moon/bin" >> $GITHUB_PATH
