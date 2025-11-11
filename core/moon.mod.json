@@ -1,0 +1,10 @@
+{
+  "name": "kuboon/hello",
+  "version": "0.1.0",
+  "deps": {},
+  "readme": "README.md",
+  "repository": "",
+  "license": "MIT",
+  "keywords": [],
+  "description": "A simple hello world module in MoonBit"
+}

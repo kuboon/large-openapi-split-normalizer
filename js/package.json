@@ -1,0 +1,14 @@
+{
+  "name": "@kuboon/hello-wasm-js",
+  "version": "0.1.0",
+  "description": "JavaScript bindings for MoonBit hello WASM module",
+  "type": "module",
+  "main": "src/hello.js",
+  "scripts": {
+    "test": "node test/hello.test.js"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": ">=18"
+  }
+}

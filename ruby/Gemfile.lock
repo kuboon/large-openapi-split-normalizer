@@ -1,0 +1,25 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    minitest (5.26.1)
+    wasmtime (26.0.0-aarch64-linux)
+    wasmtime (26.0.0-aarch64-linux-musl)
+    wasmtime (26.0.0-arm64-darwin)
+    wasmtime (26.0.0-x86_64-darwin)
+    wasmtime (26.0.0-x86_64-linux)
+    wasmtime (26.0.0-x86_64-linux-musl)
+
+PLATFORMS
+  aarch64-linux
+  aarch64-linux-musl
+  arm64-darwin
+  x86_64-darwin
+  x86_64-linux
+  x86_64-linux-musl
+
+DEPENDENCIES
+  minitest (~> 5.25)
+  wasmtime (~> 26.0)
+
+BUNDLED WITH
+   2.7.2
