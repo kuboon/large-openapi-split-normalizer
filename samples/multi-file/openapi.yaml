@@ -1,0 +1,44 @@
+openapi: 3.0.3
+info:
+  title: Sample API with Circular References
+  description: A sample API demonstrating circular references between User and Organization
+  version: 1.0.0
+  contact:
+    name: API Support
+    email: support@example.com
+
+servers:
+  - url: https://api.example.com/v1
+    description: Production server
+
+paths:
+  /users:
+    $ref: './paths/users.yaml'
+  
+  /users/{userId}:
+    $ref: './paths/users_by_id.yaml'
+  
+  /organizations:
+    $ref: './paths/organizations.yaml'
+  
+  /organizations/{orgId}:
+    $ref: './paths/organizations_by_id.yaml'
+
+components:
+  schemas:
+    User:
+      $ref: './components/schemas/User.yaml'
+    UserInput:
+      $ref: './components/schemas/UserInput.yaml'
+    Organization:
+      $ref: './components/schemas/Organization.yaml'
+    OrganizationInput:
+      $ref: './components/schemas/OrganizationInput.yaml'
+    Error:
+      $ref: './components/schemas/Error.yaml'
+
+tags:
+  - name: users
+    description: User management operations
+  - name: organizations
+    description: Organization management operations

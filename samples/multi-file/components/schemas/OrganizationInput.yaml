@@ -1,0 +1,30 @@
+type: object
+description: Input schema for creating a new organization
+required:
+  - name
+  - ownerId
+properties:
+  name:
+    type: string
+    minLength: 1
+    maxLength: 100
+    description: Organization name
+    example: "Acme Corporation"
+  description:
+    type: string
+    description: Organization description
+    example: "A leading technology company"
+  ownerId:
+    type: string
+    format: uuid
+    description: User ID of the organization owner
+    example: "123e4567-e89b-12d3-a456-426614174000"
+  industry:
+    type: string
+    description: Industry sector
+    example: "Technology"
+  website:
+    type: string
+    format: uri
+    description: Organization website
+    example: "https://www.acme.com"
