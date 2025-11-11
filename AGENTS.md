@@ -2,7 +2,9 @@
 
 ## Project Overview
 
-This project demonstrates a minimal "hello world" example written in MoonBit, compiled to WebAssembly (WASM), and bound to multiple runtime environments (JavaScript, Ruby, and Python). The goal is to showcase the cross-platform interoperability of WASM components generated from MoonBit.
+This project provides a tool for analyzing and reorganizing large OpenAPI schema YAML files that are split across multiple files using `$ref` references (typically 100+ files). The core functionality is implemented in MoonBit and compiled to WebAssembly (WASM) for cross-platform compatibility. The tool loads the entire schema into memory, analyzes dependencies between components, and reorganizes them for optimal structure.
+
+The WASM module is bound to multiple runtime environments (JavaScript, Ruby, and Python), enabling the tool to be used across different platforms and integrated into various workflows. This architecture demonstrates the power of WASM for building portable, high-performance tools that can be consumed from any language ecosystem.
 
 ## Project Structure
 
